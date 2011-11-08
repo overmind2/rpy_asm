@@ -1,22 +1,29 @@
 
+from pypy.rlib.jit import elidable
+
 def pack(op, a, b=0, c=0, imm=0):
     return op | (a << 8) | (b << 16) | (c << 24) | (imm << 32)
 
+@elidable
 def unpack_op(insn):
     return insn & 0xff
 
+@elidable
 def unpack_a(insn):
     return (insn >> 8) & 0xff
 
+@elidable
 def unpack_b(insn):
     b = (insn >> 16) & 0xff
     if b > 0x7f:
         b -= 0x100
     return b
 
+@elidable
 def unpack_c(insn):
     return (insn >> 24) & 0xff
 
+@elidable
 def unpack_imm(insn):
     imm = (insn >> 32) & 0xffffffff
     if imm >= 0x7fffffff:
@@ -40,7 +47,7 @@ def handles(name):
         insn_names[name] = insn_id
         func_table[name] = func
         idx2name.append(name)
-        func._always_inline_ = True
+        #func._always_inline_ = True
     return wrap
 
 def make_dispatcher():

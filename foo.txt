@@ -13,7 +13,7 @@
 
 .function main
 .locals n
-    movei n, 40
+    movei n, 30
     call n, fibo, n, 1
     print n
     halt

@@ -1,5 +1,8 @@
 
 import vm_insn
+from pypy.rlib.jit import JitDriver, elidable, hint
+
+jitdriver = JitDriver(greens=['insn', 'op', 'pc'], reds=['vm'])
 
 FRAMESIZE = 1024
 
@@ -21,6 +24,7 @@ class AsmVM(object):
         insn = 0
         a = 0
         while True:
+            jitdriver.jit_merge_point(insn=insn, op=op, pc=self.pc, vm=self)
             insn = self.code[self.pc]
             self.pc += 1
             op = vm_insn.unpack_op(insn)
