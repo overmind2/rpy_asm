@@ -1,0 +1,25 @@
+# attributes starts with .
+# comments starts with #
+# instructions are like `operation operand1, operand2`
+
+.function   fibo
+.args       n
+.locals     t1
+    blti n, 2, L_basecase
+    addi t1, n, -1
+    call t1, fibo, t1, 1
+    addi n, n, -2
+    call n, fibo, n, 1
+    add n, t1, n
+    label L_basecase
+    ret n
+.endfunction
+
+.function main
+.locals n
+    movei n, 30
+    call n, fibo, n, 1
+    print n
+    halt
+.endfunction
+
