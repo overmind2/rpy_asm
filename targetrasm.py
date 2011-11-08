@@ -3,9 +3,9 @@ import assembler
 import vm
 from pypy.rlib.streamio import open_file_as_stream as open
 
-def jitpolicy(driver):
-    from pypy.jit.codewriter.policy import JitPolicy
-    return JitPolicy()
+#def jitpolicy(driver):
+#    from pypy.jit.codewriter.policy import JitPolicy
+#    return JitPolicy()
 
 def main(argv):
     f = open(argv[1])
