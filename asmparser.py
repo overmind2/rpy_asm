@@ -77,7 +77,7 @@ def clean_up(line):
 class AsmParser(PackratParser):
     r'''
     IGNORE:
-        ` |#[^\n]*`;
+        `\t| |#[^\n]*`;
 
     INTEGER:
         c = `-?(0|([1-9][0-9]*))`
@@ -93,12 +93,7 @@ class AsmParser(PackratParser):
         !__any__;
 
     NEWLINE:
-        `[ ]*\n|#[^\n]*`;
-
-    REST_OF_LINE:
-        l = `[^#\n]*`
-        IGNORE*
-        return {l};
+        `[\t ]*\n|#[^\n]*`;
 
     program:
         s = func_def*

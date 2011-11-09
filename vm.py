@@ -15,10 +15,12 @@ class AsmVM(object):
         self.sp = main_framesize
 
     def set(self, idx, val):
-        self.frame[self.sp - idx] = val
+        real_idx = self.sp - idx
+        self.frame[real_idx] = val
 
     def at(self, idx):
-        return self.frame[self.sp - idx]
+        real_idx = self.sp - idx
+        return self.frame[real_idx]
 
     def run(self):
         op = 0
